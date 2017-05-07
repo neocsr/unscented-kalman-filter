@@ -115,18 +115,18 @@ int main(int argc, char* argv[]) {
       measurement_pack_list.push_back(meas_package);
     }
 
-      // read ground truth data to compare later
-      float x_gt;
-      float y_gt;
-      float vx_gt;
-      float vy_gt;
-      iss >> x_gt;
-      iss >> y_gt;
-      iss >> vx_gt;
-      iss >> vy_gt;
-      gt_package.gt_values_ = VectorXd(4);
-      gt_package.gt_values_ << x_gt, y_gt, vx_gt, vy_gt;
-      gt_pack_list.push_back(gt_package);
+    // read ground truth data to compare later
+    float x_gt;
+    float y_gt;
+    float vx_gt;
+    float vy_gt;
+    iss >> x_gt;
+    iss >> y_gt;
+    iss >> vx_gt;
+    iss >> vy_gt;
+    gt_package.gt_values_ = VectorXd(4);
+    gt_package.gt_values_ << x_gt, y_gt, vx_gt, vy_gt;
+    gt_pack_list.push_back(gt_package);
   }
 
   // Create a UKF instance
@@ -168,9 +168,9 @@ int main(int argc, char* argv[]) {
     // output the state vector
     out_file_ << ukf.x_(0) << "\t"; // pos1 - est
     out_file_ << ukf.x_(1) << "\t"; // pos2 - est
-    out_file_ << ukf.x_(2) << "\t"; // vel_abs -est
-    out_file_ << ukf.x_(3) << "\t"; // yaw_angle -est
-    out_file_ << ukf.x_(4) << "\t"; // yaw_rate -est
+    out_file_ << ukf.x_(2) << "\t"; // vel_abs - est
+    out_file_ << ukf.x_(3) << "\t"; // yaw_angle - est
+    out_file_ << ukf.x_(4) << "\t"; // yaw_rate - est
 
     // output lidar and radar specific data
     if (measurement_pack_list[k].sensor_type_ == MeasurementPackage::LASER) {
@@ -199,10 +199,10 @@ int main(int argc, char* argv[]) {
     }
 
     // output the ground truth
-    out_file_ << gt_pack_list[k].gt_values_(0) << "\t";
-    out_file_ << gt_pack_list[k].gt_values_(1) << "\t";
-    out_file_ << gt_pack_list[k].gt_values_(2) << "\t";
-    out_file_ << gt_pack_list[k].gt_values_(3) << "\n";
+    out_file_ << gt_pack_list[k].gt_values_(0) << "\t"; // px true
+    out_file_ << gt_pack_list[k].gt_values_(1) << "\t"; // py true
+    out_file_ << gt_pack_list[k].gt_values_(2) << "\t"; // vx true
+    out_file_ << gt_pack_list[k].gt_values_(3) << "\n"; // vy true
 
     // convert ukf x vector to cartesian to compare to ground truth
     VectorXd ukf_x_cartesian_ = VectorXd(4);
