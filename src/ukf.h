@@ -123,6 +123,17 @@ public:
   void PredictStateMean();
 
   void PredictStateCovariance();
+
+    VectorXd PredictMeasurement(int n_z, const MatrixXd &Zsig) const;
+
+    MatrixXd
+    PrepareMeasurementCovariance(int n_z, MatrixXd &Zsig, const VectorXd &z_pred) const;
+
+    MatrixXd
+    PrepareCrossCorrelation(int n_z, MatrixXd &Zsig, const VectorXd &z_pred) const;
+
+    VectorXd PrepareResidual(const MeasurementPackage &meas_package, int n_z,
+                             const VectorXd &z_pred) const;
 };
 
 #endif /* UKF_H */
