@@ -4,3 +4,5 @@
 # build files
 build/
 make-build-debug
+.idea
+cmake-build-debug
